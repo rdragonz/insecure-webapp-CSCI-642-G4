@@ -1,1 +1,27 @@
-/target/*
+##########################
+# VISUAL STUDIO CODE
+##########################
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+.dist
+
+sonarqube/data/*
+!sonarqube/data/.gitkeep
+sonarqube/logs/*
+!sonarqube/logs/.gitkeep
+sonarqube/extensions/*
+!sonarqube/extensions/.gitkeep
+postgresql/data/*
+!postgresql/data/.gitkeep
+
