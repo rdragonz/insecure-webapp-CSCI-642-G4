@@ -1,6 +1,7 @@
 package com.insecure;
 
 import java.util.Date;
+import java.lang.String;
 
 public class Appointment {
     private String description;
