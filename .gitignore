@@ -30,3 +30,5 @@ postgresql/data/*
 /target/*
 /webapp/target/*
 /webapp/.mvn/*
+/webapp/mvnw
+/webapp/mvnw.cmd
