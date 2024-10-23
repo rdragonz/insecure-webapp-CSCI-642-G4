@@ -9,18 +9,29 @@ import java.util.List;
 public class CalendarService {
     private Connection conn;
 
-    // Constructor accepting a database connection
-    public CalendarService(Connection conn) {
-        this.conn = conn;
-    }
-
-    // Default constructor (used in production, creates a real connection)
+    // Constructor that sets up the database connection using environment variables
     public CalendarService() {
         try {
-            this.conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Calendar", "your_username", "your_password");
+            // Load credentials from environment variables
+            String dbUrl = System.getenv("DB_URL");              // Database URL
+            String dbUsername = System.getenv("DB_USERNAME");    // Database username
+            String dbPassword = System.getenv("DB_PASSWORD");    // Database password
+
+            if (dbUrl == null || dbUsername == null || dbPassword == null) {
+                throw new RuntimeException("Database credentials are not set in environment variables");
+            }
+
+            // Establish connection using environment variables
+            this.conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException("Failed to connect to the database");
         }
+    }
+
+    // Constructor for testing (mocked connection)
+    public CalendarService(Connection conn) {
+        this.conn = conn;
     }
 
     public List<Appointment> getAllAppointments() {
