@@ -4,25 +4,46 @@ services:
   calendar-webapp:
     build: .
     ports:
-      - "8080:8080"
+      - "8080:4567"
     networks:
       - sonar-network
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/calendar
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    
+    healthcheck:
+      test: ["CMD", "sh", "-c", "curl -f http://localhost:4567 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   sonarqube:
     image: sonarqube:community
     depends_on:
       db:
         condition: service_healthy
+      calendar-webapp:
+        condition: service_healthy
     environment:
+      #variables for the web app
+      DB_URL: jdbc:postgresql://db:5432/Calendar
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
       SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar
-      SONAR_JDBC_USERNAME: sonar
-      SONAR_JDBC_PASSWORD: sonar
+      SONAR_JDBC_USERNAME: ${DB_USERNAME}
+      SONAR_JDBC_PASSWORD: ${DB_PASSWORD}
       SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
       SONAR_ES_JAVA_OPTS: "-Des.disk.watermark.high=97% -Des.disk.watermark.flood_stage=98%" #temp disable
     volumes:
       - ./sonarqube/data:/opt/sonarqube/data
       - ./sonarqube/extensions:/opt/sonarqube/extensions
       - ./sonarqube/logs:/opt/sonarqube/logs
+      
     ports:
       - "9000:9000"
     networks:
@@ -32,13 +53,18 @@ services:
     image: postgres:12
     restart: unless-stopped
     environment:
-      POSTGRES_USER: sonar
-      POSTGRES_PASSWORD: sonar
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: calendar
     volumes:
-      - ./postgresql:/var/lib/postgresql
       - ./postgresql/data:/var/lib/postgresql/data
+      - ./webapp/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./webapp/sonar.sql:/docker-entrypoint-initdb.d/sonar.sql
+      
+      
+      
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U sonar"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d calendar"]
       interval: 10s
       timeout: 5s
       retries: 5

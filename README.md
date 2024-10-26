@@ -44,6 +44,9 @@ This application can be run as a Docker container. The requirements are as follo
     docker
     docker-compose
 
+copy the .env_sample to .env and add your postgresql credential. If you dont have an existing postgresql credential, you can make up one
+and docker will create it for you.
+
 To run the app as a Docker container with SonarQube included, simply run ``docker-compose up``. 
 
 Access to the application will be available at ``http://localhost:8080/my-calendar-app/`` and SonarQube will be available at ``http://localhost:9000``

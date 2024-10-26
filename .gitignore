@@ -32,3 +32,5 @@ postgresql/data/*
 /webapp/.mvn/*
 /webapp/mvnw
 /webapp/mvnw.cmd
+
+.env
