@@ -13,6 +13,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.7</version> <!-- Ensure this matches your SLF4J version -->
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.11</version> <!-- Latest compatible version -->
+        </dependency>
         <!-- SparkJava for Web Framework -->
         <dependency>
             <groupId>com.sparkjava</groupId>
@@ -35,10 +45,11 @@
         </dependency>
 
         <!-- Jetty Server for Embedded Web Server -->
+        <!-- Jetty Server for Embedded Web Server -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>11.0.6</version>
+            <version>9.4.43.v20210629</version>
         </dependency>
 
         <!-- HikariCP for database connection pooling -->
