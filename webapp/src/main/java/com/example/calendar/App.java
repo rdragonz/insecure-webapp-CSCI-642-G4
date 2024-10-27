@@ -64,6 +64,21 @@ public class App {
             }
         }, templateEngine);
 
+        post("/admin/add", (req, res) -> {
+            // Get form parameters
+            String date = req.queryParams("date");
+            String time = req.queryParams("time");
+            String description = req.queryParams("description");
+
+            // Add the new appointment using CalendarService
+            calendarService.addAppointment(date, time, description);
+
+            // Redirect back to the admin page after adding the appointment
+            res.redirect("/admin");
+            return null;
+        });
+
+
         get("/logout", (req, res) -> {
             req.session().removeAttribute("authenticated");
             res.redirect("/login");
