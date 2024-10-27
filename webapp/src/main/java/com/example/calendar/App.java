@@ -105,7 +105,14 @@ public class App {
             return null;
         });
 
-
+        post("/admin/delete", (req, res) -> {
+            int id = Integer.parseInt(req.queryParams("id"));
+            // Call CalendarService to delete the appointment
+            calendarService.deleteAppointment(id);
+            // Redirect back to the admin page after deleting
+            res.redirect("/admin");
+            return null;
+        });
 
         get("/logout", (req, res) -> {
             req.session().removeAttribute("authenticated");
