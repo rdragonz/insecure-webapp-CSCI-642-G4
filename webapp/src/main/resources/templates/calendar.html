@@ -4,26 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 0.8rem;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .add-appointment {
+            text-align: center;
+        }
+        .add-appointment button {
+            padding: 0.8rem 1.2rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-appointment button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Calendar for John Q. Public</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <th:block th:each="appointment : ${appointments}">
+    <div class="container">
+        <h1>Calendar for John Q. Public</h1>
+
+        <!-- Table displaying appointments -->
+        <table>
+            <thead>
                 <tr>
-                    <td th:text="${appointment.date}"></td>
-                    <td th:text="${appointment.time}"></td>
-                    <td th:text="${appointment.description}"></td>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Description</th>
                 </tr>
-            </th:block>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <!-- Loop through appointments -->
+                <th:block th:each="appointment : ${appointments}">
+                    <tr>
+                        <td th:text="${appointment.date}"></td>
+                        <td th:text="${appointment.time}"></td>
+                        <td th:text="${appointment.description}"></td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+
+        <!-- Button to add a new appointment (if needed for unauthenticated users) -->
+        <div class="add-appointment">
+            <button onclick="location.href='/login'">Sign In to Schedule Appointment</button>
+        </div>
+    </div>
 </body>
 </html>
