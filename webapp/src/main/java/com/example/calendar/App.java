@@ -26,7 +26,8 @@ public class App {
         }, templateEngine);
 
         // Route to login page
-        get("/login", (req, res) -> new ModelAndView(null, "login"), templateEngine);
+        get("/login", (req, res) -> new ModelAndView(new HashMap<>(), "login"), templateEngine);
+
 
         // Route to handle login post request
         post("/login", (req, res) -> {
