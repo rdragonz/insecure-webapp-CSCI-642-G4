@@ -78,6 +78,32 @@ public class App {
             return null;
         });
 
+        // Route to display the edit form for a specific appointment
+        get("/admin/edit", (req, res) -> {
+            int id = Integer.parseInt(req.queryParams("id"));
+            Appointment appointment = calendarService.getAppointmentById(id);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("appointment", appointment);
+            return new ModelAndView(model, "edit"); // Render an "edit.html" template
+        }, templateEngine);
+
+        // Route to handle the edit form submission
+        post("/admin/edit", (req, res) -> {
+            int id = Integer.parseInt(req.queryParams("id"));
+            String date = req.queryParams("date");
+            String time = req.queryParams("time");
+            String description = req.queryParams("description");
+
+            // Update the appointment in the database
+            calendarService.updateAppointment(id, date, time, description);
+
+            // Redirect back to the admin page after updating
+            res.redirect("/admin");
+            return null;
+        });
+
+
 
         get("/logout", (req, res) -> {
             req.session().removeAttribute("authenticated");
