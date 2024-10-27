@@ -83,4 +83,12 @@ public class CalendarService {
             e.printStackTrace();
         }
     }
+    public void deleteAppointment(int id) {
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM appointments WHERE id = ?")) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
