@@ -36,11 +36,13 @@ public class App {
 
 
 
-        // Route to handle login post request
         post("/login", (req, res) -> {
             String username = req.queryParams("username");
             String password = req.queryParams("password");
+
             if (userService.authenticate(username, password)) {
+                // Set session attribute to indicate the user is logged in
+                req.session().attribute("authenticated", true);
                 res.redirect("/admin");
             } else {
                 res.redirect("/login?error=true");
@@ -48,9 +50,11 @@ public class App {
             return null;
         });
 
-        // Admin page to manage appointments
+
         get("/admin", (req, res) -> {
-            if (userService.isAuthenticated(req)) {
+            // Check if the user is authenticated
+            Boolean isAuthenticated = req.session().attribute("authenticated");
+            if (isAuthenticated != null && isAuthenticated) {
                 Map<String, Object> model = new HashMap<>();
                 model.put("appointments", calendarService.getAllAppointments());
                 return new ModelAndView(model, "admin");
@@ -59,5 +63,13 @@ public class App {
                 return null;
             }
         }, templateEngine);
+
+        get("/logout", (req, res) -> {
+            req.session().removeAttribute("authenticated");
+            res.redirect("/login");
+            return null;
+        });
+
+
     }
 }
