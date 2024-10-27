@@ -1,6 +1,7 @@
 package com.example.calendar;
 
 import static spark.Spark.*;
+import com.example.calendar.models.Appointment;
 import com.example.calendar.services.CalendarService;
 import com.example.calendar.services.UserService;
 import spark.ModelAndView;
