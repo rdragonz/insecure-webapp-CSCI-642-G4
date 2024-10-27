@@ -49,4 +49,4 @@ and docker will create it for you.
 
 To run the app as a Docker container with SonarQube included, simply run ``docker-compose up``. 
 
-Access to the application will be available at ``http://localhost:8080/my-calendar-app/`` and SonarQube will be available at ``http://localhost:9000``
+Access to the application will be available at ``http://localhost:8080/`` and SonarQube will be available at ``http://localhost:9000``
