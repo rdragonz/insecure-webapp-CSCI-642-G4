@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Appointment</title>
+</head>
+<body>
+    <h1>Edit Appointment</h1>
+    <form action="/admin/edit" method="POST">
+        <input type="hidden" name="id" th:value="${appointment.id}">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" th:value="${appointment.date}" required>
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" th:value="${appointment.time}" required>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" th:value="${appointment.description}" required>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

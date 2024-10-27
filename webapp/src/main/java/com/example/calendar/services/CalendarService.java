@@ -57,4 +57,30 @@ public class CalendarService {
             e.printStackTrace();
         }
     }
+
+    public Appointment getAppointmentById(int id) {
+        Appointment appointment = null;
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM appointments WHERE id = ?")) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                appointment = new Appointment(rs.getInt("id"), rs.getString("date"), rs.getString("time"), rs.getString("description"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return appointment;
+    }
+
+    public void updateAppointment(int id, String date, String time, String description) {
+        try (PreparedStatement stmt = conn.prepareStatement("UPDATE appointments SET date = ?, time = ?, description = ? WHERE id = ?")) {
+            stmt.setString(1, date);
+            stmt.setString(2, time);
+            stmt.setString(3, description);
+            stmt.setInt(4, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
