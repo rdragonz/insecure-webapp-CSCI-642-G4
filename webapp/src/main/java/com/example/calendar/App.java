@@ -25,8 +25,15 @@ public class App {
             return new ModelAndView(model, "calendar");
         }, templateEngine);
 
-        // Route to login page
-        get("/login", (req, res) -> new ModelAndView(new HashMap<>(), "login"), templateEngine);
+        get("/login", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            // Check if there is an "error" parameter in the request
+            if (req.queryParams("error") != null) {
+                model.put("error", true);
+            }
+            return new ModelAndView(model, "login");
+        }, templateEngine);
+
 
 
         // Route to handle login post request
