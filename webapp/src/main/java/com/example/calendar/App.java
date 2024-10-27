@@ -89,6 +89,7 @@ public class App {
             return new ModelAndView(model, "edit"); // Render an "edit.html" template
         }, templateEngine);
 
+
         // Route to handle the edit form submission
         post("/admin/edit", (req, res) -> {
             int id = Integer.parseInt(req.queryParams("id"));

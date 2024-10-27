@@ -99,7 +99,7 @@
                         <td>
                             <div class="actions">
                                 <!-- Edit button -->
-                                <form action="/admin/edit" method="POST">
+                                <form action="/admin/edit" method="GET">
                                     <input type="hidden" name="id" th:value="${appointment.id}">
                                     <button type="submit">Edit</button>
                                 </form>
