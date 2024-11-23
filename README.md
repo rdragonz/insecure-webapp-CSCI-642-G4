@@ -29,9 +29,8 @@ Next, create the database schema.
     );
     \q
 
-Finally, edit ``/webapp/src/main/resources/application.properties`` to set the username and password for the PostgreSQL user you just created.
-
 ### Running the application
+
 
 	mvn clean install
 	mvn package
@@ -50,3 +49,13 @@ and docker will create it for you.
 To run the app as a Docker container with SonarQube included, simply run ``docker-compose up``. 
 
 Access to the application will be available at ``http://localhost:8080/`` and SonarQube will be available at ``http://localhost:9000``
+
+## Logging in to admin dashboard
+
+Visit ``http://localhost:8080/login``.
+
+The credentials as specified by the LLM that generated the repository are as follows:
+
+Username: ``john``
+
+Password: ``password123``
