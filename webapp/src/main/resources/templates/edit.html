@@ -4,18 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 0.8rem;
+            font-weight: bold;
+        }
+        input {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button {
+            margin-top: 1.5rem;
+            padding: 0.8rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Edit Appointment</h1>
-    <form action="/admin/edit" method="POST">
-        <input type="hidden" name="id" th:value="${appointment.id}">
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" th:value="${appointment.date}" required>
-        <label for="time">Time:</label>
-        <input type="time" id="time" name="time" th:value="${appointment.time}" required>
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" th:value="${appointment.description}" required>
-        <button type="submit">Save Changes</button>
-    </form>
+    <div class="container">
+        <h1>Edit Appointment</h1>
+        <form action="/admin/edit" method="POST">
+            <input type="hidden" name="id" th:value="${appointment.id}">
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" th:value="${appointment.date}" required>
+            
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" th:value="${appointment.time}" required>
+            
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" th:value="${appointment.description}" required>
+            
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
 </body>
 </html>
