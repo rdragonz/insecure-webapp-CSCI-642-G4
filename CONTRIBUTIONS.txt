@@ -1,0 +1,11 @@
+This .txt contains any CODE contributions written by team members, also including security testing
+
+Kemoy Campbell:
+- Added SonarQube, containerized the app with Docker
+
+Red Ziogas:
+- Generated webapp functionality via prompt engineering
+- Generated webapp beautification code
+
+John West:
+- Created script in CSRF-test to test CSRF vulnerability
